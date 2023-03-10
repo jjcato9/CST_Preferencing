@@ -3,7 +3,7 @@ library(stringr)
 library(ggmap)
 
 ## Read in Data
-data <- read.csv('PreferenceExtract-0196038521.csv')
+data <- read.csv('CST_updated.csv')
 
 #drop unecessary columns
 data <- data[,c(2,6,10,11)]
@@ -117,7 +117,7 @@ data_2 <- data_2 %>% rowwise() %>%
 
 ### Look at distribution of job themes
 themes <- data_2[5:15]
-themes$index <- seq(1:605)
+themes$index <- seq(1:606)
 themes <- themes[,c(12,1:11)]
 themes <- themes %>% rowwise() %>%
   mutate(num = sum(c_across(ENT:VAS)))
@@ -130,9 +130,9 @@ t_themes <- t_themes[2:12,]
 theme_names <- rownames(t_themes)
 
 t_themes <- t_themes %>% rowwise() %>%
-  mutate(total = sum(c_across(1:605)))
+  mutate(total = sum(c_across(1:606)))
 
-t_themes <- t_themes[,606]
+t_themes <- t_themes[,607]
 t_themes$theme <- theme_names
 t_themes <- t_themes[,c(2,1)]
 
@@ -143,18 +143,11 @@ write_csv(data_2,'CST_finder/data/CST_data.csv')
 
 
 ### Create Locations DataFrame
-regions <- unique(data_2$Region)
+#regions <- unique(data_2$Region)
 #locations <- as.data.frame(regions)
 #locations <- locations %>% mutate(ggmap::geocode(regions))
 
-write.csv(locations,'CST_finder/data/locations.csv')
-
-source('CST_finder/job_filter.R')
-
-data_3 <- job_filter(data_2,c('Plastic Surgery','ENT'))
-
-data_3 <- data_3 %>% group_by(Region) %>% summarise(n = n())
-
+#write.csv(locations,'CST_finder/data/locations.csv')
 
 ## Split up data by region to clean up Description Separately
 eastmid <- data %>% filter(Region == 'Health Education England East Midlands')

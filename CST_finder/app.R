@@ -58,11 +58,24 @@ ui <- fluidPage(
                   selected = 'All'),
     submitButton("Submit")),
     mainPanel(
+      HTML('<h5><em>A Shiny App created by Jess Caterson</em></h5>'),
+      br(),
+      p('This is a Shiny App designed to navigate the CST jobs listed for commencement in August to October 2023.'),
+      br(),
+      p('Select your preferred jobs and regions and click submit to see the jobs available fulfilling this criteria.'),
+      br(),
+      p('This app has been built using CST preferencing data released on 10th March 2023 (Updated from initial release c6th March).'),
+      br(),
+      HTML('<p>For more detail on how this app was built, you can visit my<a href = \'https://github.com/jjcato9/CST_Preferencing\'> GitHub</a> site.</p>'),
       h3('Explore The Map'),
+      HTML('<p><em>Zoom in to see closer detail and hover over the circles to get job breakdown by region</em></p>'),
       textOutput('selection'),
       plotlyOutput('map'),
       h3('Jobs Matching Preferences'),
-      tableOutput('table')
+      HTML('<p><em>See a list of jobs matching your search criteria</em></p>'),
+      tableOutput('table'),
+      br(),
+      p('Copyright Jess Caterson')
     
     )
   )
